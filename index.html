@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AprendeKids 🌈</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Panel Superior (Menú y Estrellas en Inicio) -->
+    <div id="panel-superior">
+        <header>
+            <h1 class="titulo-principal">🌈 APRENDEKIDS</h1>
+            <p class="subtitulo">¡Aprender jugando es divertido!</p>
+            <div class="marcador-estrellas">
+                ⭐ ESTRELLAS: <span id="contador-estrellas">0</span> ⭐
+                <button class="btn-reset" onclick="reiniciarEstrellas()" title="Reiniciar estrellas">🔄</button>
+            </div>
+            <!-- Control de Música de Fondo -->
+            <div class="control-musica">
+                <button id="btn-musica" onclick="alternarMusica()">🎵 MÚSICA: OFF</button>
+            </div>
+        </header>
+
+        <nav class="menu-principal">
+            <button onclick="cambiarSeccion('inicio')">🏠 INICIO</button>
+            <button onclick="cambiarSeccion('letras')">🔤 LETRAS</button>
+            <button onclick="cambiarSeccion('numeros')">🔢 NÚMEROS</button>
+            <button onclick="cambiarSeccion('colores')">🎨 COLORES</button>
+            <button onclick="cambiarSeccion('juegos')">🎮 JUEGOS</button>
+        </nav>
+    </div>
+
+    <!-- Botón para regresar al Menú Principal -->
+    <div id="panel-volver" class="oculta">
+        <button class="btn-volver-inicio" onclick="cambiarSeccion('inicio')">🏠 VOLVER AL INICIO</button>
+    </div>
+
+    <!-- Contenido Principal -->
+    <main>
+        <!-- SECCIÓN: INICIO -->
+        <section id="seccion-inicio" class="seccion activa">
+            <div class="panel-mascota">
+                <div class="mascota-emoji">🐻✨</div>
+                <div class="mensaje-mascota">¡Hola amiguito! Bienvenid@ a AprendeKids.</div>
+            </div>
+
+            <h2>🎒 ¿Qué quieres aprender hoy?</h2>
+            <div class="grid-inicio">
+                <button onclick="cambiarSeccion('letras')">🌸 VER LETRAS (A-Z)</button>
+                <button onclick="cambiarSeccion('numeros')">⭐ CONTAR NÚMEROS (1-50)</button>
+                <button onclick="cambiarSeccion('colores')">🖍️ EXPLORAR COLORES</button>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: LETRAS (A-Z) -->
+        <section id="seccion-letras" class="seccion">
+            <h2>🔤 ¡Abecedario Completo!</h2>
+            <div class="tarjeta-educativa">
+                <div id="letra-gigante" class="simbolo-gigante">A</div>
+                <div id="letra-emoji" class="emoji-gigante">🌳</div>
+                <div id="letra-palabra" class="palabra-gigante">Árbol</div>
+            </div>
+            <button class="btn-audio" onclick="hablarLetra()">🔊 ESCUCHAR DE NUEVO</button>
+            <div class="nav-educativa">
+                <button id="btn-letra-prev" onclick="anteriorLetra()">⬅️ ANTERIOR</button>
+                <button id="btn-letra-next" onclick="siguienteLetra()">SIGUIENTE ➡️</button>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: NÚMEROS (1-50) -->
+        <section id="seccion-numeros" class="seccion">
+            <h2>🔢 ¡Vamos a contar hasta el 50!</h2>
+            <div class="tarjeta-educativa">
+                <div id="numero-gigante" class="simbolo-gigante">1</div>
+                <div id="numero-palabra" class="palabra-gigante">1 manzana</div>
+            </div>
+            <button class="btn-audio" onclick="hablarNumero()">🔊 ESCUCHAR DE NUEVO</button>
+            <div class="nav-educativa">
+                <button id="btn-num-prev" onclick="anteriorNumero()">⬅️ ANTERIOR</button>
+                <button id="btn-num-next" onclick="siguienteNumero()">SIGUIENTE ➡️</button>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: COLORES -->
+        <section id="seccion-colores" class="seccion">
+            <h2>🎨 ¡Todos los Colores!</h2>
+            <div class="tarjeta-educativa">
+                <div id="muestra-color" class="cuadro-color"></div>
+                <div id="nombre-color" class="palabra-gigante">Rojo</div>
+            </div>
+            <button class="btn-audio" onclick="hablarColor()">🔊 ESCUCHAR DE NUEVO</button>
+            <div class="nav-educativa">
+                <button id="btn-col-prev" onclick="anteriorColor()">⬅️ ANTERIOR</button>
+                <button id="btn-col-next" onclick="siguienteColor()">SIGUIENTE ➡️</button>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: CENTRO DE JUEGOS -->
+        <section id="seccion-juegos" class="seccion">
+            <h2>🎮 CENTRO DE JUEGOS</h2>
+            <div id="menu-juegos" class="grid-juegos">
+                <div class="tarjeta-juego">
+                    <h3>🧠 MEMORIA MÁGICA (24 CARTAS)</h3>
+                    <p>Encuentra las 12 parejas ocultas.</p>
+                    <button onclick="iniciarJuego('memoria')">JUGAR 🧩</button>
+                </div>
+                <div class="tarjeta-juego">
+                    <h3>🔤 COMPLETA LA PALABRA</h3>
+                    <p>Adivina la letra que falta en la palabra.</p>
+                    <button onclick="iniciarJuego('palabra')">JUGAR 🎯</button>
+                </div>
+                <div class="tarjeta-juego">
+                    <h3>🔢 CONTEO RÁPIDO</h3>
+                    <p>Cuenta cuántos objetos hay en pantalla.</p>
+                    <button onclick="iniciarJuego('conteo')">JUGAR 🔢</button>
+                </div>
+                <div class="tarjeta-juego">
+                    <h3>🎨 ADIVINA EL COLOR</h3>
+                    <p>Identifica el color de cada fruta u objeto.</p>
+                    <button onclick="iniciarJuego('color')">JUGAR 🎨</button>
+                </div>
+                <div class="tarjeta-juego">
+                    <h3>⚖️ ¿CUÁL ES MAYOR?</h3>
+                    <p>Compara dos grupos de objetos y escoge el grupo mayor.</p>
+                    <button onclick="iniciarJuego('mayor')">JUGAR ⚖️</button>
+                </div>
+            </div>
+
+            <!-- Contenedor del Juego Activo -->
+            <div id="pantalla-juego" class="pantalla-juego oculta">
+                <button class="btn-volver" onclick="volverAMenuJuegos()">⬅️ MENÚ DE JUEGOS</button>
+                <div id="contenido-juego"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-app">
+        <p>✨ AprendeKids 🌈 — ¡Creado para aprender y divertirse! ✨</p>
+    </footer>
+
+    <!-- Overlay para Aciertos Rápidos -->
+    <div id="efecto-celebracion" class="celebracion-oculta"></div>
+
+    <!-- Modal para Finalizar un Juego -->
+    <div id="modal-fin-juego" class="modal-oculto">
+        <div class="contenido-modal">
+            <div class="trofeo-animado">🏆✨</div>
+            <h2>¡LO LOGRASTE! 🎉</h2>
+            <p>¡Eres superinteligente! Has completado el juego.</p>
+            <div class="btn-modal-grupo">
+                <button id="btn-repetir-juego">🔄 JUGAR OTRA VEZ</button>
+                <button onclick="volverAMenuJuegos()">🎮 MENÚ DE JUEGOS</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
