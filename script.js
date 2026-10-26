@@ -1,4 +1,4 @@
-// --- AUDIO Y SONIDOS SINTETIZADOS CON WEB AUDIO API ---
+// --- AUDIO Y SONIDOS SINTETIZADOS CON WEB AUDIO API (AUMENTO DE VOLUMEN) ---
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
 function sonar(tipo) {
@@ -13,7 +13,7 @@ function sonar(tipo) {
         osc.type = 'sine';
         osc.frequency.setValueAtTime(450, now);
         osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
-        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.setValueAtTime(0.85, now); // Volumen incrementado
         gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
         osc.start(now); osc.stop(now + 0.08);
     } else if (tipo === 'acierto') {
@@ -25,7 +25,7 @@ function sonar(tipo) {
         osc.frequency.setValueAtTime(523.25, now);
         osc.frequency.setValueAtTime(659.25, now + 0.1);
         osc.frequency.setValueAtTime(783.99, now + 0.2);
-        gain.gain.setValueAtTime(0.3, now);
+        gain.gain.setValueAtTime(0.95, now); // Volumen incrementado
         gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
         osc.start(now); osc.stop(now + 0.4);
     } else if (tipo === 'victoria_fanfarria') {
@@ -42,7 +42,7 @@ function sonar(tipo) {
             const t = now + tiempos[idx];
             osc.type = 'triangle';
             osc.frequency.setValueAtTime(freq, t);
-            gain.gain.setValueAtTime(0.35, t);
+            gain.gain.setValueAtTime(0.90, t); // Volumen incrementado
             gain.gain.exponentialRampToValueAtTime(0.001, t + duraciones[idx]);
             osc.start(t);
             osc.stop(t + duraciones[idx]);
@@ -50,7 +50,7 @@ function sonar(tipo) {
     }
 }
 
-// --- MÚSICA DE FONDO SUAVE ---
+// --- MÚSICA DE FONDO NIVELADA ---
 let musicaSonando = false;
 let intervaloMusica = null;
 
@@ -84,7 +84,7 @@ function reproducirMelodiaInfantil() {
         const now = audioCtx.currentTime;
         osc.type = 'sine';
         osc.frequency.setValueAtTime(notas[paso % notas.length], now);
-        gain.gain.setValueAtTime(0.03, now);
+        gain.gain.setValueAtTime(0.12, now); // Volumen de música ajustado
         gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
         
         osc.start(now);
@@ -93,7 +93,7 @@ function reproducirMelodiaInfantil() {
     }, 900);
 }
 
-// --- CONFIGURACIÓN DE VOZ FEMENINA Y LENTA CON PAUSAS ---
+// --- VOZ SINTÉTICA A MÁXIMO VOLUMEN Y PAUSADA ---
 let vozFemenina = null;
 
 function cargarVoces() {
@@ -125,6 +125,7 @@ function hablarPausado(parte1, parte2) {
     u1.lang = "es-MX";
     u1.rate = 0.55;
     u1.pitch = 1.25;
+    u1.volume = 1.0; // Volumen al 100%
 
     u1.onend = () => {
         setTimeout(() => {
@@ -133,6 +134,7 @@ function hablarPausado(parte1, parte2) {
             u2.lang = "es-MX";
             u2.rate = 0.55;
             u2.pitch = 1.25;
+            u2.volume = 1.0; // Volumen al 100%
             window.speechSynthesis.speak(u2);
         }, 400);
     };
@@ -149,6 +151,7 @@ function hablarSencillo(texto) {
     u.lang = "es-MX";
     u.rate = 0.58;
     u.pitch = 1.25;
+    u.volume = 1.0; // Volumen al 100%
     window.speechSynthesis.speak(u);
 }
 
@@ -420,7 +423,7 @@ function volverAMenuJuegos() {
     document.getElementById('menu-juegos').classList.remove('oculta');
 }
 
-// 1. MEMORIA DE 24 CARTAS (4 COLS X 6 FILAS EN MÓVIL)
+// 1. MEMORIA DE 24 CARTAS
 function cargarMemoria24() {
     const emojisDisponibles = [...poolEmojisGenerales, "🦁", "🐘", "🍦", "🌙", "🦒", "🧀", "🐢"].sort(() => Math.random() - 0.5);
     const seleccion12 = emojisDisponibles.slice(0, 12);

@@ -260,10 +260,9 @@ button:active {
 
 .nav-educativa button { flex: 1; }
 
-/* 🧠 MEMORIA DE 24 CARTAS OPTIMIZADA PARA MÓVIL (4 COLUMNAS) */
 .grid-memoria-24 {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas fijas en celulares para encajar perfecto */
+    grid-template-columns: repeat(4, 1fr);
     gap: 8px;
     max-width: 500px;
     margin: 15px auto;
@@ -272,7 +271,7 @@ button:active {
 
 @media (min-width: 600px) {
     .grid-memoria-24 {
-        grid-template-columns: repeat(6, 1fr); /* 6 columnas en tablets y computadoras */
+        grid-template-columns: repeat(6, 1fr);
         max-width: 750px;
         gap: 12px;
     }
@@ -280,7 +279,7 @@ button:active {
 
 .carta-memoria-24 {
     font-size: clamp(28px, 8vw, 45px) !important;
-    aspect-ratio: 1 / 1; /* Mantiene las tarjetas perfectamente cuadradas */
+    aspect-ratio: 1 / 1;
     width: 100% !important;
     min-height: auto !important;
     border-radius: 16px !important;
